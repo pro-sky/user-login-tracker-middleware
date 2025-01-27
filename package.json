@@ -1,0 +1,32 @@
+{
+  "name": "user-login-tracker-middlewar",
+  "version": "1.0.0",
+  "description": "User Login Tracker",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pro-sky/user-login-tracker-middleware.git"
+  },
+  "keywords": [
+    "Login",
+    "Tracker"
+  ],
+  "dependencies": {
+    "mongoose": "^6.0.0",
+    "mysql2": "^2.3.0",
+    "geoip-lite": "^1.4.2",
+    "ua-parser-js": "^1.0.2"
+  },
+  "peerDependencies": {
+    "express": ">=4.17.1"
+  },
+  "author": "pro-sky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pro-sky/user-login-tracker-middleware/issues"
+  },
+  "homepage": "https://github.com/pro-sky/user-login-tracker-middleware#readme"
+}
