@@ -10,7 +10,7 @@ class UserTracker {
 
   _initializeAdapter(options) {
     if (options.mongodb) {
-      return new MongoAdapter();
+      return new MongoAdapter(options.mongoose);
     } else if (options.mysql) {
       return new MySQLAdapter(options.mysql);
     }
@@ -25,7 +25,7 @@ class UserTracker {
         
         const deviceInfo = this.parser.parseUserAgent(userAgent);
         const locationInfo = this.parser.parseLocation(ip);
-        console.log('REQUEST USER:::::', req.user)
+        console.log('REQUEST USER:::::', req)
         const activityData = {
           userId: req.user?.id,
           email: req.user?.email,
@@ -41,7 +41,7 @@ class UserTracker {
             headers: req.headers
           }
         };
-
+        console.log("adapter", this.adapter)
         await this.adapter.saveActivity(activityData);
         next();
       } catch (error) {

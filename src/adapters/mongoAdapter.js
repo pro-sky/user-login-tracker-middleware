@@ -1,13 +1,36 @@
-const UserActivity = require('../models/mongodb/UserActivity');
+const createUserActivityModel = require('../models/mongodb/UserActivity');
 
 class MongoAdapter {
+  constructor(mongoose) {
+    this.mongoose = mongoose;
+    this.UserActivity = createUserActivityModel(mongoose);
+  }
+
   async saveActivity(data) {
-    const activity = new UserActivity(data);
-    return await activity.save();
+    try {
+      // Check connection state
+      if (this.mongoose.connection.readyState !== 1) {
+        throw new Error('MongoDB not connected');
+      }
+
+      console.log(data)
+      const activity = new this.UserActivity(data);
+    //   console.log('Activity saved:', activity);
+      await activity.save();
+      return activity;
+    } catch (error) {
+      console.error('Save activity error:', error);
+      throw error;
+    }
   }
 
   async getActivities(filters = {}) {
-    return await UserActivity.find(filters);
+    try {
+      return await UserActivity.find(filters);
+    } catch (error) {
+      console.error('Get activities error:', error);
+      throw error;
+    }
   }
 }
 
